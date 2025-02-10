@@ -1,7 +1,9 @@
 # Personalized library
 '''
     This program allows users to create a personalized library. Users can add, view, edit and delete books from their library.
-    Users can also search for books in their library.\n 
+    Users can also search for books in their library.
+    Program stores user details (name and password) and books in a list. - not efficient but for learning purposes
+    Program does not use functions yet. 
 '''
 print("Welcome to your personalized library.")
 #functions
@@ -9,8 +11,8 @@ print("Welcome to your personalized library.")
 # user_details()
 # program_menu()
 
-users = []
-AllBooks = []
+users = {}
+AllBooks = {}
 
 # Program start
 user_name = str (input("Enter your name?\n")).title()
@@ -54,8 +56,8 @@ while True:
             print(f"You already have {bookTitle} in your library")
         else:
             while True:
-                confirm_book = input(f"Press\n1. To confirm {bookTitle} and add to library\n2. To edit title\n3. To exit:\n")
-                if confirm_book == "1":
+                confirm_book = int (input(f"Press\n1. To confirm {bookTitle} and add to library\n2. To go back:\n"))
+                if confirm_book == 1:
                     print(f"You have added {bookTitle} to your library")
                     author = str (input(f"Enter author of {bookTitle}\n")).title()
                     while True:
@@ -69,13 +71,12 @@ while True:
                             print("Year of publication must be a number")
                             break
                     print(f"Adding {bookTitle} by {author} published in {year} to your library...\nIndexing...")
-                    AllBooks.append((bookTitle, author, year))
+                    AllBooks.append3((bookTitle, author, year))
                     break
-                elif confirm_book == "2":
-                    bookTitle = input("Enter title of book:\n")
-                    AllBooks.append(bookTitle)
-                elif confirm_book == "3":
-                    print(f"Goodbye, {user_name}")
+                
+                elif confirm_book == 2:
+                    pass
+           
                 else:
                     print("Please enter a valid input")
                 break
@@ -84,8 +85,8 @@ while True:
     elif choice == "2":
         print("Loading all AllBooks in library")
         if len(AllBooks) >= 1:
-            for book in AllBooks:
-                print(book)
+            for title, writer, pub_year in AllBooks.items():
+                print(title, writer, pub_year)
         else:
             print("You have not added a book yet.\n Let's add a book")
         # code should run program menu screen line 41
@@ -96,7 +97,7 @@ while True:
         if len(AllBooks) >= 1:
             for book in AllBooks:
                 print(AllBooks)
-            for i, book in enumerate(AllBooks):
+            for title, writer, year in AllBooks.items():
                 edit_book = input(f"BookOption: {i+1}, Title: {AllBooks}")
         else:
             print("You have not added a book yet")
