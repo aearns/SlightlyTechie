@@ -73,9 +73,9 @@ while True:
                         except ValueError:
                             print("Year of publication must be a number")
                         
+                    books_dir[bookTitle]= (author, year)
                     print(f"Adding {bookTitle} by {author} published in {year} to your library...\nIndexing...")
                     # for book, publisher, date in  :
-                    books_dir.update({bookTitle: author})
                     break
                 
                 elif confirm_book == 2:
@@ -100,11 +100,18 @@ while True:
         print("Let's pick a book to edit")
         if len(books_dir) >= 1:
             for book in books_dir:
-                print(books_dir)
+                print(f"- {books_dir}\n")
             for title, writer, year in books_dir.items():
-                edit_book = input(f"BookOption: {i+1}, Title: {books_dir}")
-        else:
-            print("You have not added a book yet")
+                edit_book = print(f"{range(len(books_dir))}., - {books_dir}\n")
+                if edit_book == range(len(books_dir)):
+                    new_title = input("Enter new title of book:\n")
+                    new_author = input("Enter new author of book:\n")
+                    new_year = input("Enter new year of publication:\n")
+
+                    books_dir.update({new_title: new_author, new_year})
+
+            else:
+                print("You have not added a book yet")
 
     elif choice == "4":
         search_query = input("Search title, author or publication year of book to delete:\n").split()
@@ -114,7 +121,7 @@ while True:
                 print(f"{len(word)} matches found")
                 print(f"-{books_dir}")
                 for num in range(len(word)):
-                    delete_options = input(f"{num}. -{books_dir}")
+                    delete_options = input(f"{num}. - {books_dir} \n")
                     if delete_options == num:
                         books_dir.pop()
                         print(f"{books_dir} deleted from library")
