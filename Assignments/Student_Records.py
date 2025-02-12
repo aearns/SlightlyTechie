@@ -182,9 +182,7 @@ def search_record(student_dir, word):
                 print(f"-{word}")
 
 def exit():
-    pass
-
-
+    exit()
 
 def courses():
     courses = []
@@ -192,7 +190,6 @@ def courses():
     view_all()
     if select_student in student_dir:
         courses = str (input("Please enter course:\n")).title
-
         while courses.isalpha():
             logging.info(f"{courses} successfully added")
             print(f"{courses} added successfully")
