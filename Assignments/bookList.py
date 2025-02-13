@@ -59,7 +59,7 @@ while True:
                 if confirm_book == 1:
                     print(f"You have added {bookTitle} to your library")
                     try:
-                        author = str (input(f"Enter author of {bookTitle}\n")).title()
+                        author = str (input(f"Enter author of {bookTitle}:\n")).title()
                     except ValueError:
                         print("Author must be a name")  
                         continue      
@@ -89,8 +89,9 @@ while True:
     elif choice == "2":
         print("Loading all books in library")
         if len(books_dir) >= 1:
-            for title, writer in books_dir.items():
-                print(f"- {title}, {writer}")
+            print(f"You have {len(books_dir)} in your library")
+            for text, (title, (writer, year)) in enumerate(books_dir.items(), start=1):
+                print(f"{text}. {title}, {writer}, {year}")
         else:
             print("You have not added a book yet.\nLet's add a book")
         # code should run program menu screen line 41
@@ -99,26 +100,25 @@ while True:
     elif choice == "3":
         print("Let's pick a book to edit")
         if len(books_dir) >= 1:
-            for book in books_dir:
-                print(f"- {books_dir}\n")
-            for title, writer, year in books_dir.items():
-                edit_book = print(f"{range(len(books_dir))}., - {books_dir}\n")
+            for book, (title, (writer, year)) in enumerate(books_dir.items(), start=1):      #b
+                edit_book = print(f"{book}. {title}, {writer}, {year}")
                 if edit_book == range(len(books_dir)):
                     new_title = input("Enter new title of book:\n")
                     new_author = input("Enter new author of book:\n")
                     new_year = input("Enter new year of publication:\n")
-
-                    books_dir.update({new_title: new_author, new_year})
+                    books_dir.pop(title)
+                    books_dir[new_title]= (new_author, new_year)
 
             else:
                 print("You have not added a book yet")
 
     elif choice == "4":
-        search_query = input("Search title, author or publication year of book to delete:\n").split()
+        search_query = input("Enter title, author or publication year of book to delete:\n").split()
         print("Listing all matches of books, authors and years found in your library")
         for word in search_query:
             if word in books_dir.item():
                 print(f"{len(word)} matches found")
+            #   for word, (title, (writer, year)) in enumerate(books_dir.items(), start=1)
                 print(f"-{books_dir}")
                 for num in range(len(word)):
                     delete_options = input(f"{num}. - {books_dir} \n")
