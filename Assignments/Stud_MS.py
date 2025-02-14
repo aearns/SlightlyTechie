@@ -36,10 +36,56 @@ def user():
     if password == confirm_password:
         users.update({"name": username, "password": password})
         print(f"Welcome {username}! Verified successfully.")                        
-    print("Let's get started with your system!")
+        print("Let's get started with your system!")
     else:
-    print(f"Welcome back {username}!")
+        print(f"Welcome back {username}!")
 
+def add_student():
+    studentName = input("Enter name of student:\n").title()
+    print(f"Adding {studentName} to your system...\nIndexing...")
+
+    if studentName in student_dir:
+        print(f"You already have {studentName} in your system")
+    else:
+        while True:
+            confirm_student = int (input(f"Select\n1. To confirm and add {studentName} to system\n2. To go back\nYour choice here: "))
+            if confirm_student == 1:
+                print(f"You have added {studentName} to your system")
+                try:
+                    programme = str (input(f"Enter programme of {studentName}:\n")).title()
+                except ValueError:
+                    print("Programme must be a text")  
+                    continue      
+                while True:
+                    try:
+                        level = int (input("Enter level:\n"))
+                        if 1>= level <=4 :
+                            break
+                        else:
+                            print("Enter valid level")
+                    except ValueError:
+                        print("Student level must be 1-4")
+                    
+                student_dir[studentName]= (programme, level)
+                print(f"Adding {studentName}, {programme} in level {level} to your system...\nIndexing...")
+                # for book, publisher, date in  :
+                break
+            
+            elif confirm_student == 2:
+                pass
+        
+            else:
+                print("Please enter a valid input")
+            break
+
+def view_all():
+    print("Loading all students in system")
+    if len(student_dir) >= 1:
+        print(f"You have {len(student_dir)} in your system")
+        for text, (student_dir, (programme, level)) in enumerate(student_dir.items(), start=1):
+            print(f"{text}. {title}, {programme}, {level}")
+    else:
+        print("You have not added a book yet.\nLet's add a book")
 # Program start
 username = str (input("Enter your name?\n")).title()
 
@@ -89,13 +135,7 @@ while True:
         
     #User input 2 - View all books in system
     elif choice == "2":
-        print("Loading all students in system")
-        if len(student_dir) >= 1:
-            print(f"You have {len(student_dir)} in your system")
-            for text, (student_dir, (programme, level)) in enumerate(student_dir.items(), start=1):
-                print(f"{text}. {title}, {programme}, {level}")
-        else:
-            print("You have not added a book yet.\nLet's add a book")
+        
         # code should run program menu screen line 41
 
     #Option 3 to edit a book in system
