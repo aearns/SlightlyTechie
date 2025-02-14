@@ -40,7 +40,6 @@ if username not in users:
     print("Let's get started with your system!")
 else:
     print(f"Welcome back {username}!")
- 
 
 while True:
     # Program menu
@@ -55,30 +54,30 @@ while True:
             print(f"You already have {studentName} in your system")
         else:
             while True:
-                confirm_book = int (input(f"Select\n1. To confirm and add {studentName} to system\n2. To go back\nYour choice here: "))
-                if confirm_book == 1:
+                confirm_student = int (input(f"Select\n1. To confirm and add {studentName} to system\n2. To go back\nYour choice here: "))
+                if confirm_student == 1:
                     print(f"You have added {studentName} to your system")
                     try:
-                        author = str (input(f"Enter programme of {studentName}:\n")).title()
+                        programme = str (input(f"Enter programme of {studentName}:\n")).title()
                     except ValueError:
                         print("Programme must be a text")  
                         continue      
                     while True:
                         try:
-                            year = int (input("Enter level:\n"))
-                            if year >= 1000:
+                            level = int (input("Enter level:\n"))
+                            if 1>= level <=4 :
                                break
                             else:
-                                print("Enter valid year")
+                                print("Enter valid level")
                         except ValueError:
-                            print("Year of publication must be a number")
+                            print("Student level must be 1-4")
                         
-                    student_dir[studentName]= (author, year)
-                    print(f"Adding {studentName} by {author} published in {year} to your system...\nIndexing...")
+                    student_dir[studentName]= (programme, level)
+                    print(f"Adding {studentName}, {programme} in level {level} to your system...\nIndexing...")
                     # for book, publisher, date in  :
                     break
                 
-                elif confirm_book == 2:
+                elif confirm_student == 2:
                     pass
            
                 else:
@@ -87,40 +86,40 @@ while True:
         
     #User input 2 - View all books in system
     elif choice == "2":
-        print("Loading all books in system")
+        print("Loading all students in system")
         if len(student_dir) >= 1:
             print(f"You have {len(student_dir)} in your system")
-            for text, (title, (writer, year)) in enumerate(student_dir.items(), start=1):
-                print(f"{text}. {title}, {writer}, {year}")
+            for text, (student_dir, (programme, level)) in enumerate(student_dir.items(), start=1):
+                print(f"{text}. {title}, {programme}, {level}")
         else:
             print("You have not added a book yet.\nLet's add a book")
         # code should run program menu screen line 41
 
     #Option 3 to edit a book in system
     elif choice == "3":
-        print("Let's pick a book to edit")
+        print("Let's pick a student to edit")
         if len(student_dir) >= 1:
-            for book, (title, (writer, year)) in enumerate(student_dir.items(), start=1):      #b
-                edit_book = print(f"{book}. {title}, {writer}, {year}")
+            for book, (title, (programme, level)) in enumerate(student_dir.items(), start=1):      #
+                edit_book = print(f"{book}. {title}, {programme}, {level}")
                 if edit_book == range(len(student_dir)):
-                    new_title = input("Enter new title of book:\n")
-                    new_author = input("Enter new author of book:\n")
-                    new_year = input("Enter new year of publication:\n")
+                    new_name = input("Enter new student:\n")
+                    new_programme = input("Enter new programme:\n")
+                    new_level = input("Enter new level of student:\n")
                     student_dir.pop(title)
-                    student_dir[new_title]= (new_author, new_year)
+                    student_dir[new_name]= (new_programme, new_level)
 
             else:
                 print("You have not added a book yet")
 
     elif choice == "4":
-        search_query = input("Enter title, author or publication year of book to delete:\n").split()
-        print("Listing all matches of books, authors and years found in your system")
+        search_query = input("Enter student name, programme or  level of book to delete:\n").split()
+        print("Listing all matches of books, programmes and levels found in your system")
         for word in search_query:
             if word in student_dir.item():
                 print(f"{len(word)} matches found")
-            #   for word, (title, (writer, year)) in enumerate(student_dir.items(), start=1)
+            #   for word, (title, (programme, level)) in enumerate(student_dir.items(), start=1)
                 print(f"-{student_dir}")
-                for num in range(len(word)):
+                for num in range(len(word)):                                                 
                     delete_options = input(f"{num}. - {student_dir} \n")
                     if delete_options == num:
                         student_dir.pop()
