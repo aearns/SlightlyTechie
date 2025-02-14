@@ -127,17 +127,18 @@ while True:
 # Program menu - User inputs
     choice = (input("Enter your choice: "))
     if choice == "1":
-        
+        user()
     #User input 2 - View all books in system
     elif choice == "2":
-        
+        add_student()
         # code should run program menu screen line 41
 
     #Option 3 to edit a book in system
     elif choice == "3":
+        view_all()
 
     elif choice == "4":
-        
+        search_record()
     else:
         print("Enter a valid number")
 
