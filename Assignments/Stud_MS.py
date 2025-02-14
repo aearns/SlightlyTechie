@@ -14,11 +14,10 @@ print("Welcome to your personalized system.")
 users = {}
 student_dir = {}
 
-# Program start
-username = str (input("Enter your name?\n")).title()
-if username not in users:
+def user():
+    if username not in users:
 # Creating new user
-    print(f"Hello {username}! Let's set you up.")           # add new user to the list of users
+        print(f"Hello {username}! Let's set you up.")           # add new user to the list of users
     # users.append(username)
     while True:
         password = input("Enter a new password:\n")
@@ -38,8 +37,12 @@ if username not in users:
         users.update({"name": username, "password": password})
         print(f"Welcome {username}! Verified successfully.")                        
     print("Let's get started with your system!")
-else:
+    else:
     print(f"Welcome back {username}!")
+
+# Program start
+username = str (input("Enter your name?\n")).title()
+
 
 while True:
     # Program menu
