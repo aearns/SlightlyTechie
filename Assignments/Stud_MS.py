@@ -15,6 +15,10 @@ users = {}
 student_dir = {}
 
 def user():
+    '''
+    This function returns a user in the system.
+    This function creates user if one does not already exist
+    '''
     if username not in users:
 # Creating new user
         print(f"Hello {username}! Let's set you up.")           # add new user to the list of users
@@ -41,6 +45,9 @@ def user():
         print(f"Welcome back {username}!")
 
 def add_student():
+    '''
+    This function adds a new student to the system
+    '''
     studentName = input("Enter name of student:\n").title()
     print(f"Adding {studentName} to your system...\nIndexing...")
 
@@ -119,11 +126,13 @@ def search_record():
                 else:
                     pass
 
+def exit():
+    exit
 username = str (input("Enter your name?\n")).title()
 
 while True:
     # Program menu
-    print("Choose menu list\n1. Add new student\n2. View all students\n3. Edit student record\n4. Delete record\n5. Restart program\n6. Exit system")
+    print("Choose menu list\n1. Add new student\n2. View all students\n3. Edit student record\n4. Delete record\n5. Exit system")
 # Program menu - User inputs
     choice = (input("Enter your choice: "))
     if choice == "1":
@@ -139,6 +148,9 @@ while True:
 
     elif choice == "4":
         search_record()
+    
+    elif choice == "5":
+        exit()
     else:
         print("Enter a valid number")
 
