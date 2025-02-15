@@ -110,21 +110,24 @@ def edit_record():
         else:
             print("You have not added a book yet")
 
+def delete_record(student_dir, word):
+    search_record()
+    for num in range(len(word)):                                                 
+        delete_options = int(input(f"{num}. - {student_dir} \n"))
+        if delete_options == num:
+            student_dir.pop(num)
+            print(f"Record{num} deleted from system")
+        else:
+            print("No record found")
+
 def search_record():
-    search_query = input("Enter student name, programme or  level of book to delete:\n").split()
+    search_query = input("Enter student name, programme or level of studente:\n").split()
     print("Listing all matches of books, programmes and levels found in your system")
     for word in search_query:
         if word in student_dir.item():
             print(f"{len(word)} matches found")
         #   for word, (title, (programme, level)) in enumerate(student_dir.items(), start=1)
             print(f"-{student_dir}")
-            for num in range(len(word)):                                                 
-                delete_options = input(f"{num}. - {student_dir} \n")
-                if delete_options == num:
-                    student_dir.pop()
-                    print(f"{student_dir} deleted from system")
-                else:
-                    pass
 
 def exit():
     exit
@@ -134,7 +137,7 @@ while True:
     # Program menu
     print("Choose menu list\n1. Add new student\n2. View all students\n3. Edit student record\n4. Delete record\n5. Exit system")
 # Program menu - User inputs
-    choice = (input("Enter your choice: "))
+    choice = (input("Enter your choice:\n "))
     if choice == "1":
         user()
     #User input 2 - View all books in system
@@ -146,10 +149,13 @@ while True:
     elif choice == "3":
         view_all()
 
-    elif choice == "4":
+    elif choice == "5":
         search_record()
     
-    elif choice == "5":
+    elif choice == "4":
+        delete_record()
+
+    elif choice == "6":
         exit()
     else:
         print("Enter a valid number")
