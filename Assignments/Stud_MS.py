@@ -1,4 +1,6 @@
 # Personalized system
+import logging
+
 '''
     This program allows users to create a School Management System. Users can add, view, edit and delete student records.
     Users can also search for students in their system.
@@ -7,10 +9,6 @@
 '''
 print("Welcome to your personalized system.")
 #functions
-# start_program()
-# user_details()
-# program_menu()
-
 users = {}
 student_dir = {}
 
@@ -19,30 +17,41 @@ def user():
     This function returns a user in the system.
     This function creates user if one does not already exist
     '''
+    username = str (input("Enter your name?\n")).title()
     if username not in users:
 # Creating new user
         print(f"Hello {username}! Let's set you up.")           # add new user to the list of users
     # users.append(username)
-    while True:
-        password = input("Enter a new password:\n")
-        if len(password) >= 8 and password.isalnum():
-            print("Let's confirm your password!")
-            confirm_password = input("Confirm your password:\n")
-            while password != confirm_password:
+        while True:
+            password = input("Enter a new password:\n")
+            if len(password) >= 8 and password.isalnum():
+                print("Let's confirm your password!")
+                confirm_password = input("Confirm your password:\n")
+                while password != confirm_password:
+                    print("Passwords do not match. Please try again.")
+                    # password = str (input("What is your password? "))
+                    # confirm_password = str (input("Confirm your password: "))
+                    break
+                break
+            else:
+                print("Password must contain letters and numbers.\nIt must be at least 8 characters.")
+        
+        if password == confirm_password:
+            users.update({"name": username, "password": password})
+            print(f"Welcome {username}! Verified successfully.")                        
+            print("Let's get started with your system!")
+    else:
+        print(f"Welcome back {username}!")
+        confirm_password = input("Enter your password:\n")
+        while password != confirm_password:
                 print("Passwords do not match. Please try again.")
                 # password = str (input("What is your password? "))
                 # confirm_password = str (input("Confirm your password: "))
                 break
-            break
-        else:
-            print("Password must contain letters and numbers.\nIt must be at least 8 characters.")
-    
-    if password == confirm_password:
-        users.update({"name": username, "password": password})
-        print(f"Welcome {username}! Verified successfully.")                        
-        print("Let's get started with your system!")
-    else:
-        print(f"Welcome back {username}!")
+        if password == confirm_password:
+            print(f"Welcome back {username}! Verified successfully.")                        
+            
+
 
 def add_student():
     '''
@@ -85,14 +94,16 @@ def add_student():
                 print("Please enter a valid input")
             break
 
-def view_all():
+def view_all(student_dir):
     print("Loading all students in system")
+   
     if len(student_dir) >= 1:
         print(f"You have {len(student_dir)} in your system")
-        for text, (student_dir, (programme, level)) in enumerate(student_dir.items(), start=1):
-            print(f"{text}. {title}, {programme}, {level}")
+        for num, (student_dir, (programme, level)) in enumerate(student_dir.items(), start=1):
+            print(f"{num}. {programme}, {level}")
     else:
-        print("You have not added a book yet.\nLet's add a book")
+       print("You have no record of students.\nLet's add students.")
+    add_student()
 # Program start
 
 def edit_record():
@@ -107,8 +118,12 @@ def edit_record():
                 student_dir.pop(title)
                 student_dir[new_name]= (new_programme, new_level)
 
+    else:
+        new_add = int (input("No student found in the system:\nPress 1. Add student\n2. Exit"))
+        if new_add == 1:
+            add_student()
         else:
-            print("You have not added a book yet")
+            exit() 
 
 def delete_record(student_dir, word):
     search_record()
@@ -131,31 +146,34 @@ def search_record():
 
 def exit():
     exit
-username = str (input("Enter your name?\n")).title()
 
 while True:
     # Program menu
-    print("Choose menu list\n1. Add new student\n2. View all students\n3. Edit student record\n4. Delete record\n5. Exit system")
+    user()
+    print("Choose menu list\n1. Add new student\n2. View all students\n3. Edit student record\n4. Search student record\n5. Delete record\n6. Logout of account\n7. Exit system")
 # Program menu - User inputs
     choice = (input("Enter your choice:\n "))
     if choice == "1":
-        user()
+        add_student()
+
     #User input 2 - View all books in system
     elif choice == "2":
-        add_student()
-        # code should run program menu screen line 41
+        view_all()
 
     #Option 3 to edit a book in system
     elif choice == "3":
-        view_all()
+        edit_record()
 
-    elif choice == "5":
+    elif choice == "4":
         search_record()
     
-    elif choice == "4":
+    elif choice == "5":
         delete_record()
 
     elif choice == "6":
+        user()
+
+    elif choice == "7":
         exit()
     else:
         print("Enter a valid number")
