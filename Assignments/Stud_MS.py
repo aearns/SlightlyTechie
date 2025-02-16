@@ -51,12 +51,11 @@ def user():
         if password == confirm_password:
             print(f"Welcome back {username}! Verified successfully.")                        
             
-
-
 def add_student():
     '''
     This function adds a new student to the system
     '''
+    global student_dir
     studentName = input("Enter name of student:\n").title()
     print(f"Adding {studentName} to your system...\nIndexing...")
 
@@ -71,17 +70,16 @@ def add_student():
                     programme = str (input(f"Enter programme of {studentName}:\n")).title()
                 except ValueError:
                     print("Programme must be a text")  
-                    continue      
-                while True:
-                    try:
-                        level = int (input("Enter level:\n"))
-                        if 1>= level <=4 :
-                            break
-                        else:
-                            print("Enter valid level")
-                    except ValueError:
-                        print("Student level must be 1-4")
-                    
+                    continue                      
+                try:
+                    level = int (input("Enter level:\n"))
+                    if 100>= level <=400 :
+                        continue
+                    else:
+                        print("Enter valid level")
+                except ValueError:
+                    print("Student level must be 100 - 400")
+                    break
                 student_dir[studentName]= (programme, level)
                 print(f"Adding {studentName}, {programme} in level {level} to your system...\nIndexing...")
                 # for book, publisher, date in  :
@@ -94,17 +92,16 @@ def add_student():
                 print("Please enter a valid input")
             break
 
-def view_all(student_dir):
-    print("Loading all students in system")
-   
+def view_all():
+    global student_dir
     if len(student_dir) >= 1:
+        print("Loading all students in system")
         print(f"You have {len(student_dir)} in your system")
         for num, (student_dir, (programme, level)) in enumerate(student_dir.items(), start=1):
             print(f"{num}. {programme}, {level}")
     else:
        print("You have no record of students.\nLet's add students.")
     add_student()
-# Program start
 
 def edit_record():
     print("Let's pick a student to edit")
