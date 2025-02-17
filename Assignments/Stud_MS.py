@@ -1,6 +1,8 @@
 # Personalized system
 import logging
 
+logging.basicConfig(filename='stud_ms.log', level=logging.DEBUG)
+
 '''
     This program allows users to create a School Management System. Users can add, view, edit and delete student records.
     Users can also search for students in their system.
@@ -141,17 +143,17 @@ def delete_record(student_dir, word):
         else:
             print("No record found")
 
-def search_record():
+def search_record(student_dir, word):
     '''
     Use this function to search details of record in the system
     '''
-    global student_dir
+    #global student_dir
     search_query = input("Enter student name, programme or level of studente:\n").split()
     print("Listing all matches of students, programmes and levels found in your system")
     for word in search_query:
         if word in student_dir.item():
             print(f"{len(word)} matches found")
-            for word, (title, (programme, level)) in enumerate(student_dir.items(), start=1):
+            for word, (student_dir, (programme, level)) in enumerate(student_dir.items(), start=1):
                 print(f"-{word}")
 
 def exit():
