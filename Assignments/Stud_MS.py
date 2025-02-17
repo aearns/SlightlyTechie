@@ -133,13 +133,14 @@ def delete_record(student_dir, word):
             print("No record found")
 
 def search_record():
+    global student_dir
     search_query = input("Enter student name, programme or level of studente:\n").split()
-    print("Listing all matches of books, programmes and levels found in your system")
+    print("Listing all matches of students, programmes and levels found in your system")
     for word in search_query:
         if word in student_dir.item():
             print(f"{len(word)} matches found")
-        #   for word, (title, (programme, level)) in enumerate(student_dir.items(), start=1)
-            print(f"-{student_dir}")
+            for word, (title, (programme, level)) in enumerate(student_dir.items(), start=1):
+                print(f"-{word}")
 
 def exit():
     exit
