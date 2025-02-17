@@ -93,6 +93,9 @@ def add_student():
             break
 
 def view_all():
+    '''
+    This function view all records of students
+    '''
     global student_dir
     if len(student_dir) >= 1:
         print("Loading all students in system")
@@ -104,6 +107,9 @@ def view_all():
     add_student()
 
 def edit_record():
+    '''
+    Use this function to edit records
+    '''
     print("Let's pick a student to edit")
     if len(student_dir) >= 1:
         for book, (title, (programme, level)) in enumerate(student_dir.items(), start=1):      
@@ -123,6 +129,9 @@ def edit_record():
             exit() 
 
 def delete_record(student_dir, word):
+    '''
+    This function deletes student record
+    '''
     search_record()
     for num in range(len(word)):                                                 
         delete_options = int(input(f"{num}. - {student_dir} \n"))
@@ -133,6 +142,9 @@ def delete_record(student_dir, word):
             print("No record found")
 
 def search_record():
+    '''
+    Use this function to search details of record in the system
+    '''
     global student_dir
     search_query = input("Enter student name, programme or level of studente:\n").split()
     print("Listing all matches of students, programmes and levels found in your system")
