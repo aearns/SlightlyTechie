@@ -106,7 +106,7 @@ def view_all():
 def edit_record():
     print("Let's pick a student to edit")
     if len(student_dir) >= 1:
-        for book, (title, (programme, level)) in enumerate(student_dir.items(), start=1):      #
+        for book, (title, (programme, level)) in enumerate(student_dir.items(), start=1):      
             edit_book = print(f"{book}. {title}, {programme}, {level}")
             if edit_book == range(len(student_dir)):
                 new_name = input("Enter new student:\n")
@@ -177,13 +177,3 @@ while True:
 
 
 
-    # user_search = input("Enter title to search")
-    # if user_search in studentName(*studentName):
-    #     for book in student_dir:
-    #         print(*student_dir)
-    # add_new
-    # del_book
-    # view_all
-    # delete_all_student_dir
-    # delete_history
-    #
