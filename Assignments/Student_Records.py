@@ -176,7 +176,19 @@ def exit():
     exit
 
 def courses():
-    courses= input
+    courses = []
+    courses = str (input("Please enter student course:\n")).title
+    while courses.isalpha():
+        logging.info(f"{courses} successfully added")
+        print(f"{courses} added successfully")
+    else:
+        print("Invalid course enter.")
+
+def grades():
+    student_grades = input("Please select student course to add grade:\n") 
+    for i in courses:
+        pass
+
 
 while True:
     # Program menu
