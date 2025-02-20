@@ -190,7 +190,6 @@ def grades():
     for i in courses:
         pass
 
-
 while True:
     # Program menu
     user()
