@@ -5,6 +5,7 @@ logging.basicConfig(filename='stud_ms.log', level=logging.DEBUG)
 
 '''
     This program allows users to create a School Management System. Users can add, view, edit and delete student records.
+    Records inlcude names, ID, age, programme, courses and grades
     The program creates a secured (basic) admin/user. Access is granted to verified user to CRUD student records in the system.
     Program stores user details (name and password) and student details in a dict.
     This program implements data types, controls, functions, error handling and  logging module. 
