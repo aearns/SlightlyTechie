@@ -157,7 +157,7 @@ def edit_record(student_dir, add_student):
 
 def delete_record(student_dir, word):
     '''
-    This function deletes student record
+    This function deletes student record from system
     '''
     search_record()
     for num in range(len(word)):                                                 
