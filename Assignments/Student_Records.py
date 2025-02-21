@@ -1,5 +1,6 @@
 # Personalized system
 import logging
+import random
 
 logging.basicConfig(filename='stud_ms.log', level=logging.DEBUG)
 
@@ -11,13 +12,15 @@ logging.basicConfig(filename='stud_ms.log', level=logging.DEBUG)
     This program implements data types, controls, functions, error handling and  logging module. 
 '''
 
-logging.basicConfig(filename='stud_ms.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(name)s - %(message)s')
+logging.basicConfig(filename='stud_ms.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(name)s - %(message)s', filemode='w',)
 logging.info("App launch")
 
-print("Welcome to your personalized system.")
+def start_screen():
+    print("Welcome to your personalized system.")
 #functions
 users = {}
 student_dir = {}
+student_records = {}
 
 def user():
     '''
@@ -31,7 +34,7 @@ def user():
         print(f"Hello {username}! Let's set you up.")           # add new user to the list of users
         while True:
             password = str(input("Enter a new password:\n"))
-            if len(password) >= 8 and password.isalnum():
+            if password.isnumeric() and len(password) >= 8:
                 print("Let's confirm your password!")
                 confirm_password = input("Confirm your password:\n")
                 while password != confirm_password:
@@ -95,14 +98,19 @@ def add_student():
                     print("Student level must be 100 - 400")
                     logging.error(f"User input {level} is incorrect.")
                     break
-                student_dir[studentName]= (programme, level)
-                print(f"Adding {studentName}, {programme} in level {level} to your system...\nIndexing...")
-                logging.info(f"New student successfully added by {username}")
+
+                student_ID = random.randint(1,10)
+                
+                student_dir[studentName]= (student_ID, programme, level)
+                print(f"Adding {studentName} {student_ID}, {programme} in level {level} to your system...\nIndexing...")
+                print(f"New student successfully created")
+                logging.info(f"New student successfully created by {users[username]}")
                 # for book, publisher, date in  :
                 break
             
             elif confirm_student == 2:
-                pass
+                start_screen()
+                user()
         
             else:
                 print("Please enter a valid input")
@@ -123,9 +131,9 @@ def view_all():
         logging.info("Data request/pull successful")
     else:
        print("You have no record of students.\nLet's add students.")
-    add_student()
+       add_student()
 
-def edit_record():
+def edit_record(student_dir, add_student):
     '''
     Use this function to edit records
     '''
@@ -155,7 +163,7 @@ def delete_record(student_dir, word):
     for num in range(len(word)):                                                 
         delete_options = int(input(f"{num}. - {student_dir} \n"))
         if delete_options == num:
-            student_dir.pop(num)
+            return student_dir.pop(num)
             print(f"Record{num} deleted from system")
         else:
             print("No record found")
@@ -178,17 +186,25 @@ def exit():
 
 def courses():
     courses = []
-    courses = str (input("Please enter student course:\n")).title
-    while courses.isalpha():
-        logging.info(f"{courses} successfully added")
-        print(f"{courses} added successfully")
-    else:
-        print("Invalid course enter.")
+    select_student = input("Enter name of student to update courses:\n").title
+    view_all()
+    if select_student in student_dir:
+        courses = str (input("Please enter course:\n")).title
 
+        while courses.isalpha():
+            logging.info(f"{courses} successfully added")
+            print(f"{courses} added successfully")
+        else:
+            print("Invalid course enter.")
+    print("Student not found")
 def grades():
     student_grades = input("Please select student course to add grade:\n") 
     for i in courses:
         pass
+
+def generate_ID():
+    new_ID = random.randint(1,10)
+    student_dir.append(new_ID)
 
 while True:
     # Program menu
