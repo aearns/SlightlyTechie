@@ -182,7 +182,7 @@ def search_record(student_dir, word):
                 print(f"-{word}")
 
 def exit():
-    exit()
+    exit
 
 def courses():
     courses = []
