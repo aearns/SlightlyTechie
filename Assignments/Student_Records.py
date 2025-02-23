@@ -172,7 +172,7 @@ def search_record(student_dir, word):
     '''
     Use this function to search details of record
     '''
-    #global student_dir
+    global student_dir
     search_query = input("Enter student name, programme or level of studente:\n").split()
     print("Listing all matches of students, programmes and levels found in your system")
     for word in search_query:
