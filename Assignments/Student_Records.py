@@ -33,8 +33,8 @@ def user():
 # Creating new user
         print(f"Hello {username}! Let's set you up.")           # add new user to the list of users
         while True:
-            password = str(input("Enter a new password:\n"))
-            if password.isnumeric() and len(password) >= 8:
+            password = input("Enter a new password:\n")
+            if password.isalnum() and len(password) >= 8:
                 print("Let's confirm your password!")
                 confirm_password = input("Confirm your password:\n")
                 while password != confirm_password:
@@ -44,7 +44,7 @@ def user():
                     break
                 break
             else:
-                print("Password must contain letters and numbers.\nIt must be at least 8 characters.")
+                print("Password must contain letters and numbers and must be at least 8 characters long.")
         
         if password == confirm_password:
             users.update({"name": username, "password": password})
@@ -79,18 +79,18 @@ def add_student():
         logging.info("Student already in system")
     else:
         while True:
-            confirm_student = int (input(f"Select\n1. To confirm and add {studentName} to system\n2. To go back\nYour choice here: "))
+            confirm_student: int = input(f"Select\n1. To confirm and add {studentName} to system\n2. To go back\nYour choice here: ")
             if confirm_student == 1:
                 print(f"You have added {studentName} to your system")
                 try:
-                    programme = str (input(f"Enter programme of {studentName}:\n")).title()
+                    programme: str = input(f"Enter programme of {studentName}:\n").title()
                 except ValueError:
                     print("Programme must be a text")
                     logging.error("User error. Wrong details entered")  
                     continue                      
                 try:
-                    level = int (input("Enter level:\n"))
-                    if 100>= level <=400 :
+                    level: int = input("Enter level:\n")
+                    if 100 >= level <= 400 :
                         continue
                     else:
                         print("Enter valid level")
@@ -99,9 +99,9 @@ def add_student():
                     logging.error(f"User input {level} is incorrect.")
                     break
 
-                student_ID = random.randint(1,10)
+                student_ID: int= random.randint(1,10)
                 
-                student_dir[studentName]= (student_ID, programme, level)
+                student_dir[studentName] = (student_ID, programme, level)
                 print(f"Adding {studentName} {student_ID}, {programme} in level {level} to your system...\nIndexing...")
                 print(f"New student successfully created")
                 logging.info(f"New student successfully created by {users[username]}")
@@ -142,14 +142,14 @@ def edit_record(student_dir, add_student):
         for book, (title, (programme, level)) in enumerate(student_dir.items(), start=1):      
             edit_book = print(f"{book}. {title}, {programme}, {level}")
             if edit_book == range(len(student_dir)):
-                new_name = input("Enter new student:\n")
-                new_programme = input("Enter new programme:\n")
-                new_level = input("Enter new level of student:\n")
+                new_name: str = input("Enter new student:\n")
+                new_programme: str = input("Enter new programme:\n")
+                new_level: int = input("Enter new level of student:\n")
                 student_dir.pop(title)
                 student_dir[new_name] = (new_programme, new_level)
 
     else:
-        new_add = int (input("No student found in the system:\nPress 1. Add student\n2. Exit"))
+        new_add: int = input("No student found in the system:\nPress 1. Add student\n2. Exit")
         if new_add == 1:
             add_student()
         else:
@@ -161,14 +161,14 @@ def delete_record(student_dir, word):
     '''
     search_record()
     for num in range(len(word)):                                                 
-        delete_options = int(input(f"{num}. - {student_dir} \n"))
+        delete_options: int = input(f"{num}. - {student_dir} \n")
         if delete_options == num:
             return student_dir.pop(num)
             print(f"Record{num} deleted from system")
         else:
             print("No record found")
 
-def search_record(student_dir, word):
+def search_record(word):
     '''
     Use this function to search details of record
     '''
