@@ -61,5 +61,13 @@ class ATM:
         else:
             print("You need to log in first.")
 
-
+    def deposit(self, amount):
+        if self.logged_in_user:
+            if amount > 0:
+                self.user_accounts[self.logged_in_user]['balance'] += amount
+                print(f"Deposited ${amount}. Your new balance is: ${self.user_accounts[self.logged_in_user]['balance']}")
+            else:
+                print("Deposit amount must be positive.")
+        else:
+            print("You need to log in first.")
 
