@@ -1,5 +1,5 @@
-# Bank ATM program
-
+""" Bank ATM program
+"""
 # print('Welcome to StillBank\nPlease choose an option\n1.Withdraw Cash\n2.Check Account Balance')
 
 # user_accounts = {}
@@ -54,4 +54,12 @@ class ATM:
             self.logged_in_user = None
         else:
             print("No user logged in.")
+
+    def check_balance(self):
+        if self.logged_in_user:
+            print(f"Your balance is: ${self.user_accounts[self.logged_in_user]['balance']}")
+        else:
+            print("You need to log in first.")
+
+
 
