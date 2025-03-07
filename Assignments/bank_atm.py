@@ -78,7 +78,7 @@ class ATM:
                 self.user_accounts[self.logged_in_user]['balance'] -= amount
                 print(f"Withdrew ${amount}. Your new balance is: ${self.user_accounts[self.logged_in_user]['balance']}")
             else:
-                print("Insufficient funds or invalid withdrawal amount.")
+                print("Insufficient funds.")
         else:
             print("You need to log in first.")
 
