@@ -39,3 +39,19 @@ class ATM:
             # Initialize user account with a PIN and a starting balance of 0
             self.user_accounts[account] = {"pin": user_pin, "balance": 0}
             print(f"Account {account} successfully created.")
+
+    def login(self, account, user_pin):
+        # Check if the account exists and PIN matches
+        if account in self.user_accounts and self.user_accounts[account]["pin"] == user_pin:
+            self.logged_in_user = account
+            print(f"Login successful for account {account}.")
+        else:
+            print("Invalid account or PIN. Please try again.")
+
+    def logout(self):
+        if self.logged_in_user:
+            print(f"Logging out of account {self.logged_in_user}.")
+            self.logged_in_user = None
+        else:
+            print("No user logged in.")
+
