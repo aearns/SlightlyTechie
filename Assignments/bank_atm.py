@@ -82,3 +82,36 @@ class ATM:
         else:
             print("You need to log in first.")
 
+    def change_pin(self, old_pin, new_pin):
+        if self.logged_in_user:
+            if self.user_accounts[self.logged_in_user]["pin"] == old_pin:
+                self.user_accounts[self.logged_in_user]["pin"] = new_pin
+                print("PIN successfully changed.")
+            else:
+                print("Incorrect old PIN.")
+        else:
+            print("You need to log in first.")
+
+# Sample Usage
+
+atm = ATM()
+
+# Create accounts
+atm.create_account("user1", "1234")  
+atm.create_account("user2", "5678")  
+
+# Log in
+atm.login("user1", "1234")  # Login with user1 and correct PIN
+
+# Deposit and withdraw
+atm.deposit(100)  # Deposit $100
+atm.withdraw(50)  # Withdraw $50
+
+# Check balance
+atm.check_balance()
+
+# Change PIN
+atm.change_pin("1234", "0000")  # Change PIN to 0000
+
+# Log out
+atm.logout()
